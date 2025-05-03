@@ -1,5 +1,6 @@
 package it.epicode.ProgettoSettimanale_S7_L5.eventi;
 
+import it.epicode.ProgettoSettimanale_S7_L5.auth.app_user.AppUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,4 +24,7 @@ public class Evento {
     private LocalDate data;
     private String luogo;
     private int postiDisponibili;
+
+    @OneToOne(cascade={CascadeType.REMOVE})
+    private AppUser appUser;
 }

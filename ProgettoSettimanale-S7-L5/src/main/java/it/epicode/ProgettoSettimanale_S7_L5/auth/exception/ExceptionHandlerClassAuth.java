@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Slf4j
 @ControllerAdvice
-public class ExceptionHandlerClass extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerClassAuth extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ExceptionMessage> handleIllegalArgumentException(IllegalArgumentException e) {
         ExceptionMessage exceptionMessage = new ExceptionMessage();
