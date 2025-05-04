@@ -1,5 +1,6 @@
 package it.epicode.ProgettoSettimanale_S7_L5.prenotazioni;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.ProgettoSettimanale_S7_L5.auth.app_user.AppUser;
 import it.epicode.ProgettoSettimanale_S7_L5.eventi.Evento;
@@ -30,5 +31,7 @@ public class Prenotazione {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
+    @JsonBackReference
     private AppUser appUser;
+
 }

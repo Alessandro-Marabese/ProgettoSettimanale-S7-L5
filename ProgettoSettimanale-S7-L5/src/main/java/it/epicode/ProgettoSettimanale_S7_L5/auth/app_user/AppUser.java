@@ -1,6 +1,7 @@
 package it.epicode.ProgettoSettimanale_S7_L5.auth.app_user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.epicode.ProgettoSettimanale_S7_L5.prenotazioni.Prenotazione;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class AppUser implements UserDetails {
     private  boolean enabled=true;
 
     @OneToMany(mappedBy = "appUser")
+    @JsonManagedReference
     private List<Prenotazione> prenotazioni = new ArrayList<>();
 
     @Override

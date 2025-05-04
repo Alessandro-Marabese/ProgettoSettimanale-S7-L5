@@ -19,13 +19,13 @@ public class PrenotazioneController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ORGANIZZATORE')")
     @GetMapping("/{id}")
-    public Prenotazione findById(@PathVariable Long id) {
+    public PrenotazioneResponse findById(@PathVariable Long id) {
         return prenotazioneService.findById(id);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ORGANIZZATORE')")
     @GetMapping("/utente")
-    public List<Prenotazione> getPrenotazioniUtente() {
+    public List<PrenotazioneResponse> getPrenotazioniUtente() {
         return prenotazioneService.getPrenotazioniUtente();
     }
 

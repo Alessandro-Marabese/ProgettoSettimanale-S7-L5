@@ -16,6 +16,8 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -25,17 +27,22 @@ public class PrenotazioneService {
     private final EventoRepository eventoRepository;
     private final AppUserRepository appUserRepository;
 
-    public Prenotazione findById(Long id) {
-        return prenotazioneRepository.findById(id).orElse(null);
+    public PrenotazioneResponse findById(Long id) {
+        return prenotazioneRepository.findById(id)
+                        .map(PrenotazioneResponse::new)
+                        .orElse(null);
     }
 
-    public List<Prenotazione> getPrenotazioniUtente() {
+    public List<PrenotazioneResponse> getPrenotazioniUtente() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         AppUser appUser = appUserRepository.findByUsername(username) // o findByUsername
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
-        return prenotazioneRepository.findByAppUserId(appUser.getId());
+        return prenotazioneRepository.findByAppUserId(appUser.getId())
+                .stream()
+                .map(PrenotazioneResponse::new)
+                .collect(Collectors.toList());
     }
 
     public void save(@Valid PrenotazioneRequest request, Long utenteId){
