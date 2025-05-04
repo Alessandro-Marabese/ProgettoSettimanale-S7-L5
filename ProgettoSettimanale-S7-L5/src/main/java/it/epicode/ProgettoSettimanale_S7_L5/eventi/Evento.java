@@ -1,12 +1,15 @@
 package it.epicode.ProgettoSettimanale_S7_L5.eventi;
 
 import it.epicode.ProgettoSettimanale_S7_L5.auth.app_user.AppUser;
+import it.epicode.ProgettoSettimanale_S7_L5.prenotazioni.Prenotazione;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +30,7 @@ public class Evento {
 
     @OneToOne(cascade={CascadeType.REMOVE})
     private AppUser appUser;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Prenotazione> prenotazioni = new ArrayList<>();
 }
